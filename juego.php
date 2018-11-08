@@ -45,7 +45,7 @@ $mysqli = conectaBBDD();
     
     <!--TEMPORIZADOR-->
     <div id="cajatiempo" style="height: 30px;" >
-            <div id="tiempo" class="progress-bar progress-bar-striped bg-success" style="width: 0%;"></div>
+            <div id="tiempo" class="progress-bar p bg-success" style="width: 0%;"></div>
         </div>
     
             <p><a id="enunciado" class="btn btn-block btn-dark"></a></p>
@@ -63,10 +63,10 @@ $mysqli = conectaBBDD();
        $('#principal').load('app.php'); 
     }
     //para el temporizador
-//    var progreso;
-//    var segundo = 0;
-//    iniciaTemporizador();
-//    
+    var progreso;
+    var segundo = 0;
+    iniciaTemporizador();
+    
     
     
      //cargo el array php de preguntas en una variable javascripst
@@ -92,4 +92,47 @@ $mysqli = conectaBBDD();
      $('#r3').text(listaPreguntas[numeroPregunta][4]).click(function (){sigue();});
      $('#r4').text(listaPreguntas[numeroPregunta][5]).click(function (){sigue();});
     }
+    //las funciones para que funcione el tiempo
+    function detieneTemporizador()
+{
+    clearInterval(progreso);
+}
+
+function iniciaTemporizador()
+{
+    //temporizador de la barra
+    segundo = 0;
+    $("#tiempo").width(0).text("");
+    clearInterval(progreso);
+    progreso = setInterval(function()
+    {
+        var caja = $("#cajatiempo");
+        var tiempo = $("#tiempo");
+        if (tiempo.width() >= caja.width())
+        {
+            clearInterval(progreso);
+            segundo = 0;
+        }
+        else
+        {
+            tiempo.width(tiempo.width() + caja.width()/10);
+            segundo++;
+        }
+        //cambia el color de la barra del tiempo dependiendo del segundo en el que está
+        if (segundo < 5)
+        {
+            tiempo.removeClass("bg-warning").removeClass("bg-danger").addClass("bg-success");
+        }
+        else if (segundo < 8)
+        {
+            tiempo.removeClass("bg-success").addClass("bg-warning");
+        }
+        else 
+        {
+            tiempo.removeClass("bg-warning").addClass("bg-danger");
+        }
+        tiempo.text(segundo);
+    }, 1080);
+    
+} 
 </script>
