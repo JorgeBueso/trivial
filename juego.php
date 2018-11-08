@@ -37,8 +37,8 @@ $mysqli = conectaBBDD();
 <div>
 
     <p></p>
-    <p><a class="btn btn-block btn-dark disabled">Demuestra que estás listo para la EVAU</a></p>
-    <p><a class="btn btn-block btn-warning"  onclick="volver();"><!--<span class="fas fa-arrow-left" ></span>-->ELEGIR OTRA ASIGNATURA</a></p>
+    <p><a class="btn btn-block btn-dark disabled">TRIVIAL EVAU</a></p>
+    <p><a class="btn btn-block btn-warning"  onclick="volver();">ELEGIR OTRA ASIGNATURA</a></p>
 
     
     <p><a id="sigue1" class="btn btn-block btn-primary"><?php echo $tema; ?></a></p>
@@ -80,18 +80,39 @@ $mysqli = conectaBBDD();
     
     function sigue()
     {
-   //   $("[id*='r']").removeClass("btn-dark").removeClass("btn-secondary").removeClass("btn-danger").addClass("btn-success");
-   //   iniciaTemporizador();
+      $("[id*='r']").removeClass(".btn-success").removeClass("btn-danger");
+      iniciaTemporizador();
       
       numeroPregunta = Math.floor( Math.random() * listaPreguntas.length);
      $('#enunciado').text(listaPreguntas[numeroPregunta][1]);
      //para 
-   //  $("[id*='r']").prop("onclick", null).off("click");
+     $("[id*='r_']").prop("onclick", null).off("click");
      $('#r1').text(listaPreguntas[numeroPregunta][2]).click(function (){sigue();});
      $('#r2').text(listaPreguntas[numeroPregunta][3]).click(function (){sigue();});
      $('#r3').text(listaPreguntas[numeroPregunta][4]).click(function (){sigue();});
      $('#r4').text(listaPreguntas[numeroPregunta][5]).click(function (){sigue();});
     }
+    
+    function cambiaPregunta(e,num)
+    {      
+        e.stopImmediatePropagation();
+         //cambia a rojo las respuestas incorrectas   
+        $("[id*='r']").removeClass("btn-success").addClass("btn-danger");
+        //, y a verde la correcta 
+        $("#r"+num).removeClass("btn-danger").addClass("btn-success").prop("onclick", null).off("click");
+        detieneTemporizador();
+        $("#r"+num).click(function(e){e.stopImmediatePropagation();sigue();});
+       
+        if (num == listaPreguntas[numeroPregunta][6])
+        {
+           correcta(num);
+        }
+        else
+        {
+           incorrecta();
+        }
+    }
+ 
     //las funciones para que funcione el tiempo
     function detieneTemporizador()
 {

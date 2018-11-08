@@ -1,7 +1,7 @@
 <div id="menu" style="color: white">
-    <p><a onclick="muestraModal();" class= "btn btn-block btn-dark " >Demuestra </a></p>
-    <p><a class="btn btn-block btn-dark disabled">Demuestra que estás listo para la EVAU</a></p>
-    <p><a class="btn btn-block btn-warning disabled" >NombreUsuario:<?php echo $_SESSION['nombreUsuario'] = $nami; ?></a></p>
+    <p><a onclick="muestraModal();" class= "btn btn-block btn-dark " >TRIVIAL EVAU/SELECTIVIDAD </a></p>
+    <p><a class="btn btn-block btn-dark disabled">ELIGE UNA ASIGNATURA</a></p>
+    <p><a class="btn btn-block btn-outline-success disabled" >NombreUsuario:<?php echo $_SESSION['nombreUsuario'] = $nami; ?></a></p>
     <p><a></a></p>
 
     
